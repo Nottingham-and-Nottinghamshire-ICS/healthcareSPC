@@ -1,0 +1,28 @@
+Package: healthcareSPC
+Title: Healthcare use over time with SPC
+Version: 0.0.0.9000
+Authors@R: person('Chris', 'Beeley', email = 'chris.beeley@gmail.com', role = c('cre', 'aut'))
+Description: This is a Golem package which looks at healthcare use over time
+  using SPC charts drawn with the qicharts2 package
+License: GPL3
+Imports: 
+    config,
+    golem,
+    shiny,
+    processx,
+    attempt,
+    DT,
+    glue,
+    htmltools,
+    readxl,
+    digest,
+    qicharts2,
+    dplyr,
+    tidyr
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.2
+URL: https://github.com/CDU-data-science-team/healthcareSPC
+BugReports: https://github.com/CDU-data-science-team/healthcareSPC/issues
+Suggests: 
+    testthat
