@@ -10,14 +10,18 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # List the first level UI elements here 
     fluidPage(
+      mod_select_sigma_filter_ui("select_sigma_filter_ui_1"),
       
       tabsetPanel(
         id = "tabset", 
         tabPanel("Acuity", id = "acuity",
                  mod_facet_graph_ui("facet_graph_ui_1")
         ),
-        tabPanel("Diagnosis", id = "acuity",
+        tabPanel("Diagnosis", id = "diagnosis",
                  mod_facet_graph_ui("facet_graph_ui_2")
+        ),
+        tabPanel("Chief complaint", id = "complaint",
+                 mod_facet_graph_ui("facet_graph_ui_3")
         ),
         tabPanel("Compare", id = "compare",
                  mod_single_double_graph_ui("single_double_graph_ui_1")

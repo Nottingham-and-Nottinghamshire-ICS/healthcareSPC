@@ -18,10 +18,10 @@ mod_facet_graph_ui <- function(id){
 #' facet_graph Server Function
 #'
 #' @noRd 
-mod_facet_graph_server <- function(input, output, session, title, variable){
+mod_facet_graph_server <- function(input, output, session, title, variable, sigma_choices){
   ns <- session$ns
   
-  output$facetPlot <- renderPlot({
+  facetReactive <- reactive({
     
     open_data %>% 
       dplyr::group_by(Date) %>% 
@@ -32,7 +32,43 @@ mod_facet_graph_server <- function(input, output, session, title, variable){
       qicharts2::qic(Date, n,
                      data = .,
                      title = title,
+                     chart = "c",
+                     freeze = which(seq(min(open_data$Date), max(open_data$Date), by = "day") == as.POSIXct("2020-03-23")),
                      facet = ~ Incident,
+                     scales = "free_y",
+                     ncol = 5)
+  })
+  
+  facetDebounce <- facetReactive %>%
+    debounce(1000)
+  
+  # pull into reactive and debounce
+  
+  output$facetPlot <- renderPlot({
+    
+    final_data <- facetDebounce()$data
+    
+    # filter by sigma if that's what they want
+    
+      if(sigma_choices$sigmaTrue()){
+        
+        plotVariables <- facetDebounce()$data %>% 
+          dplyr::filter(sigma.signal) %>% 
+          dplyr::group_by(facet1) %>% 
+          dplyr::count(sigma.signal) %>% 
+          dplyr::filter(n >= sigma_choices$sigmaLevel()) %>%
+          dplyr::pull(facet1)
+        
+        final_data <- final_data %>%
+          dplyr::filter(facet1 %in% plotVariables)
+      }
+
+    final_data %>%
+      qicharts2::qic(x, y,
+                     data = .,
+                     title = title,
+                     chart = "c",
+                     facet = ~ facet1,
                      scales = "free_y",
                      ncol = 5)
   })
@@ -55,6 +91,7 @@ mod_facet_graph_server <- function(input, output, session, title, variable){
       tidyr::complete(Date, .data[[variable]], fill = list(n = 0)) %>%
       dplyr::filter(.data[[variable]] == input$plot_click$panelvar1) %>% 
       qicharts2::qic(Date, n,
-                     data = .)
+                     data = .,
+                     chart = "c")
   })
 }

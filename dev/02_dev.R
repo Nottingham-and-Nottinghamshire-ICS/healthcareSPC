@@ -26,6 +26,7 @@ usethis::use_package( "magrittr" )
 ## Create a module infrastructure in R/
 golem::add_module( name = "facet_graph" ) # Name of the module
 golem::add_module( name = "single_double_graph" ) # Name of the module
+golem::add_module( name = "select_sigma_filter" ) # Name of the module
 
 ## Add helper functions ----
 ## Creates ftc_* and utils_*
