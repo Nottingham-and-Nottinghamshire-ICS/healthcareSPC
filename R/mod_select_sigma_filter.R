@@ -11,7 +11,7 @@ mod_select_sigma_filter_ui <- function(id){
   ns <- NS(id)
   tagList(
 
-    checkboxInput(ns("showSlider"), "Filter by number of points outside CI", value = FALSE),
+    checkboxInput(ns("showSlider"), "Filter by number of points outside CL", value = FALSE),
     conditionalPanel(
       condition = "input.showSlider == true", ns = ns,
       sliderInput(ns("slider"), "Number of points outside of sigma",

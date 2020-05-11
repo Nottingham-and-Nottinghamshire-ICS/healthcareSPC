@@ -60,6 +60,10 @@ usethis::use_github()
 usethis::use_travis()
 usethis::use_appveyor()
 
+# use pipe
+
+usethis::use_pipe()
+
 # You're now set! ----
 # go to dev/03_deploy.R
 rstudioapi::navigateToFile("dev/03_deploy.R")

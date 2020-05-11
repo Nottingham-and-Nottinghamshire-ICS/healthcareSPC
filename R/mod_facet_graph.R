@@ -33,7 +33,6 @@ mod_facet_graph_server <- function(input, output, session, title, variable, sigm
                      data = .,
                      title = title,
                      chart = "c",
-                     freeze = which(seq(min(open_data$Date), max(open_data$Date), by = "day") == as.POSIXct("2020-03-23")),
                      facet = ~ Incident,
                      scales = "free_y",
                      ncol = 5)
@@ -68,6 +67,8 @@ mod_facet_graph_server <- function(input, output, session, title, variable, sigm
                      data = .,
                      title = title,
                      chart = "c",
+                     freeze = which(seq(min(open_data$Date), max(open_data$Date), by = "day") == as.POSIXct("2020-03-23")),
+                     part.labels = c("Pre lockdown", "Lockdown"),
                      facet = ~ facet1,
                      scales = "free_y",
                      ncol = 5)
@@ -92,6 +93,9 @@ mod_facet_graph_server <- function(input, output, session, title, variable, sigm
       dplyr::filter(.data[[variable]] == input$plot_click$panelvar1) %>% 
       qicharts2::qic(Date, n,
                      data = .,
-                     chart = "c")
+                     chart = "c",
+                     freeze = which(seq(min(open_data$Date), max(open_data$Date), by = "day") == as.POSIXct("2020-03-23")),
+                     part.labels = c("Pre lockdown", "Lockdown")
+      )
   })
 }
