@@ -11,7 +11,7 @@ mod_facet_graph_ui <- function(id){
   ns <- NS(id)
   tagList(
     h4("Click a plot to see a bigger version"),
-    plotOutput(ns("facetPlot"), height = 1000, click = ns("plot_click"))
+    uiOutput(ns("dynamicPlot"))
   )
 }
 
@@ -21,6 +21,11 @@ mod_facet_graph_ui <- function(id){
 mod_facet_graph_server <- function(input, output, session, title, variable, sigma_choices){
   ns <- session$ns
   
+  output$dynamicPlot <- renderUI({
+    
+    plotOutput(session$ns("facetPlot"), height = 1000, click = ns("plot_click"))
+  })
+
   facetReactive <- reactive({
     
     open_data %>% 
@@ -94,6 +99,7 @@ mod_facet_graph_server <- function(input, output, session, title, variable, sigm
       qicharts2::qic(Date, n,
                      data = .,
                      chart = "c",
+                     title = input$plot_click$panelvar1,
                      freeze = which(seq(min(open_data$Date), max(open_data$Date), by = "day") == as.POSIXct("2020-03-23")),
                      part.labels = c("Pre lockdown", "Lockdown")
       )

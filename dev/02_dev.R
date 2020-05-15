@@ -21,6 +21,8 @@ usethis::use_package( "qicharts2" )
 usethis::use_package( "dplyr" )
 usethis::use_package( "tidyr" )
 usethis::use_package( "magrittr" )
+usethis::use_package( "knitr" )
+
 
 ## Add modules ----
 ## Create a module infrastructure in R/

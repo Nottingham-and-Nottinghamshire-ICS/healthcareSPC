@@ -11,7 +11,6 @@ app_ui <- function(request) {
     # List the first level UI elements here 
     fluidPage(
       mod_select_sigma_filter_ui("select_sigma_filter_ui_1"),
-      
       tabsetPanel(
         id = "tabset", 
         tabPanel("Acuity", id = "acuity",
