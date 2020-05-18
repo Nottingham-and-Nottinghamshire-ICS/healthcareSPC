@@ -10,22 +10,28 @@
 mod_select_sigma_filter_ui <- function(id){
   ns <- NS(id)
   tagList(
-
-    checkboxInput(ns("showSlider"), "Filter by number of points outside CL", value = FALSE),
+    
     conditionalPanel(
-      condition = "input.showSlider == true", ns = ns,
-      sliderInput(ns("slider"), "Number of points outside of sigma",
-                  min = 1, max = 20, value = 10)
+      condition = "input.tabset != 'compare'",
+      tagList(
+        
+        checkboxInput(ns("showSlider"), "Filter by number of points outside CL", value = FALSE),
+        conditionalPanel(
+          condition = "input.showSlider", ns = ns,
+          sliderInput(ns("slider"), "Number of points outside of sigma",
+                      min = 1, max = 20, value = 10)
+        )
+      )
     )
   )
 }
-    
+
 #' select_sigma_filter Server Function
 #'
 #' @noRd 
 mod_select_sigma_filter_server <- function(input, output, session){
   ns <- session$ns
- 
+  
   return(
     list(
       sigmaTrue = reactive({ input$showSlider }),
@@ -33,4 +39,4 @@ mod_select_sigma_filter_server <- function(input, output, session){
     )
   )
 }
-    
+

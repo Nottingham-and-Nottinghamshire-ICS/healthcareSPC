@@ -13,16 +13,16 @@ app_ui <- function(request) {
       mod_select_sigma_filter_ui("select_sigma_filter_ui_1"),
       tabsetPanel(
         id = "tabset", 
-        tabPanel("Acuity", id = "acuity",
+        tabPanel("Acuity", value = "acuity",
                  mod_facet_graph_ui("facet_graph_ui_1")
         ),
-        tabPanel("Diagnosis", id = "diagnosis",
+        tabPanel("Diagnosis", value = "diagnosis",
                  mod_facet_graph_ui("facet_graph_ui_2")
         ),
-        tabPanel("Chief complaint", id = "complaint",
+        tabPanel("Chief complaint", value = "complaint",
                  mod_facet_graph_ui("facet_graph_ui_3")
         ),
-        tabPanel("Compare", id = "compare",
+        tabPanel("Compare", value = "compare",
                  mod_single_double_graph_ui("single_double_graph_ui_1")
         )
       )

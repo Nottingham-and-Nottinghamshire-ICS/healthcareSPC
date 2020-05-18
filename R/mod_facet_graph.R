@@ -23,7 +23,13 @@ mod_facet_graph_server <- function(input, output, session, title, variable, sigm
   
   output$dynamicPlot <- renderUI({
     
-    plotOutput(session$ns("facetPlot"), height = 1000, click = ns("plot_click"))
+    # calculate height of plot
+    
+    number_of_plots <- length(unique(open_data[[variable]]))
+    
+    plot_height <- ceiling(number_of_plots / 5) * 200
+    
+    plotOutput(session$ns("facetPlot"), height = plot_height, click = ns("plot_click"))
   })
 
   facetReactive <- reactive({
