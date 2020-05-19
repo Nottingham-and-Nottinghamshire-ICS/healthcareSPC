@@ -1,0 +1,13 @@
+name: healthcarespc
+title: healthcareSPC
+username: chrisbeeley
+account: chrisbeeley
+server: involve.nottshc.nhs.uk
+hostUrl: https://involve.nottshc.nhs.uk:8443/__api__
+appId: 3
+bundleId: 15
+url: https://involve.nottshc.nhs.uk:8443/content/3/
+when: 1589793258.37706
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: scratch.R|data-raw/Data_ECDS_Jan-Apr.xlsx|data-raw/open_data.R
